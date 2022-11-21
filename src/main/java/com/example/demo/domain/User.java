@@ -22,5 +22,7 @@ public class User {
     private Integer age;
     private Long membershipNumber;
     private String region;
+    private String password;
+    private String email;
     private String role;
 }
