@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -49,7 +50,7 @@ public class BallotService {
     public Ballot todo(BallotDTO ballotDTO){return modelMapper.map(ballotDTO,Ballot.class);}
     public BallotDTO todto(Ballot ballot){return modelMapper.map(ballot,BallotDTO.class);
     }
-
+    @Transactional
     public String deleteVote(Long membershipNumber) {
        if (userIsPresent(membershipNumber)){
            Optional<User> user = userRepository.findByMembershipNumber(membershipNumber);
