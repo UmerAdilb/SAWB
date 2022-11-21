@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,5 +22,12 @@ public class GlobalExceptionHandler {
             response.put(fieldName,message);
         });
         return new ResponseEntity<Map<String,String>>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = NoValueFound.class)
+    public ResponseEntity<ErrorMessage> valueNotFoundException(NoValueFound ex){
+        ErrorMessage errorMessage = ErrorMessage.builder().body(ex.getMessage()).code(HttpStatus.NOT_FOUND)
+                .timeStamp(LocalDateTime.now()).build();
+        return new ResponseEntity(errorMessage, HttpStatus.NOT_FOUND);
     }
 }

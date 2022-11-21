@@ -24,4 +24,12 @@ public class BallotController {
     @DeleteMapping("/delete/{membershipNumber}")
     public String deleteVote(@Valid @PathVariable Long membershipNumber) {
         return ballotService.deleteVote(membershipNumber);}
+
+
+    @GetMapping("/get/{membershipNumber}")
+    public ResponseEntity<CandidateDTO> showCandidateVoted(@PathVariable Long membershipNumber){
+        return ResponseEntity.ok(ballotService.getVotedCandidate(membershipNumber));
+    }
+
+
 }
