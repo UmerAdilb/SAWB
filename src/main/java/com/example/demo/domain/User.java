@@ -2,10 +2,9 @@ package com.example.demo.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
@@ -24,5 +23,6 @@ public class User {
     private String region;
     private String password;
     private String email;
-    private String role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Roles> roles=new HashSet<>();
 }

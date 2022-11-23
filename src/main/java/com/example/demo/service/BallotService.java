@@ -61,9 +61,6 @@ public class BallotService {
         }
     }
 
-
-
-
     @Transactional
     public String deleteVote(Long membershipNumber) {
         if (userIsPresent(membershipNumber)) {

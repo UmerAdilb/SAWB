@@ -5,26 +5,48 @@ import com.example.demo.dto.UserDTO;
 import com.example.demo.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("candidate/")
+@RequestMapping("/api")
 public class CandidateController {
     @Autowired
     CandidateService candidateService;
 
-    @PostMapping("/save")
+    /**
+     * This will post candidate
+     * @param candidateDTO
+     * @return
+     */
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/candidate")
     public ResponseEntity<CandidateDTO> saveUser(@Valid @RequestBody CandidateDTO candidateDTO) {
-        return ResponseEntity.ok(candidateService.addUser(candidateDTO));}
+        return ResponseEntity.ok(candidateService.addCandidate(candidateDTO));}
 
-    @GetMapping("/get")
-    public ResponseEntity<List<CandidateDTO>> getUsers(){
-        return ResponseEntity.ok(candidateService.getAllUser());}
+    /**
+     * This will get candidte
+     * @return
+     */
 
-    @PutMapping("update/{id}")
-    public ResponseEntity<CandidateDTO> updateUser(@Valid @RequestBody CandidateDTO candidateDTO,@PathVariable Long id) {
-        return ResponseEntity.ok(candidateService.update(candidateDTO,id));}
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/candidate")
+    public ResponseEntity<List<CandidateDTO>> getAllCandidate(){
+        return ResponseEntity.ok(candidateService.getAllCandidate());}
+
+    /**
+     * This will update candidate by id
+     * @param candidateDTO
+     * @param id
+     * @return
+     */
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/candidate/{id}")
+    public ResponseEntity<CandidateDTO> updateCandidate(@Valid @RequestBody CandidateDTO candidateDTO,@PathVariable Long id) {
+        return ResponseEntity.ok(candidateService.updateCandidateById(candidateDTO,id));}
 }

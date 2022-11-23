@@ -20,19 +20,19 @@ public class CandidateService {
     @Autowired
     ModelMapper modelMapper;
 
-    public CandidateDTO addUser(CandidateDTO candidateDTO) {
+    public CandidateDTO addCandidate(CandidateDTO candidateDTO) {
         Candidate candidate = candidateRepository.save(todo(candidateDTO));
         return todto(candidate);
     }
 
-    public List<CandidateDTO> getAllUser() {
+    public List<CandidateDTO> getAllCandidate() {
         List<Candidate> candidates = candidateRepository.findAll();
         List<CandidateDTO> candidateDTOS=candidates.stream().map(
                 c->modelMapper.map(c,CandidateDTO.class)).collect(Collectors.toList());
         return candidateDTOS;}
 
-    public CandidateDTO update(CandidateDTO candidateDTO, Long id) {
-        if (userPresentById(id)){
+    public CandidateDTO updateCandidateById(CandidateDTO candidateDTO, Long id) {
+        if (candidatePresentById(id)){
             Candidate candidate = candidateRepository.save(todo(candidateDTO));
             return todto(candidate);  }
         else{throw new NullPointerException();   }}
@@ -40,7 +40,7 @@ public class CandidateService {
 
 
 
-    public Boolean userPresentById(Long id) {
+    public Boolean candidatePresentById(Long id) {
         Optional<Candidate> candidate = candidateRepository.findById(id);
         if (candidate.isPresent()){
             return true;}

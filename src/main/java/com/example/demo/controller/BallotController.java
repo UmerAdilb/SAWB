@@ -12,21 +12,37 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("ballot/")
-public class BallotController {
+@RequestMapping("/api")
+public class    BallotController {
     @Autowired
     BallotService ballotService;
 
-    @PostMapping("/save")
+    /**
+     * This will post ballot
+     * @param balletDTO
+     * @return
+     */
+
+    @PostMapping("/ballot")
     public ResponseEntity<BallotDTO> saveVote(@Valid @RequestBody BallotDTO balletDTO) {
         return ResponseEntity.ok(ballotService.addVote(balletDTO));}
 
-    @DeleteMapping("/delete/{membershipNumber}")
-    public String deleteVote(@Valid @PathVariable Long membershipNumber) {
+    /**
+     * This will delete ballot by member ship number
+     * @param membershipNumber
+     * @return
+     */
+    @DeleteMapping("/ballot/{membershipNumber}")
+    public String deleteVoteByMemberShipNumber(@Valid @PathVariable Long membershipNumber) {
         return ballotService.deleteVote(membershipNumber);}
 
 
-    @GetMapping("/get/{membershipNumber}")
+    /**
+     * This will get vote og particular user
+     * @param membershipNumber
+     * @return
+     */
+    @GetMapping("/ballot/{membershipNumber}")
     public ResponseEntity<CandidateDTO> showCandidateVoted(@PathVariable Long membershipNumber){
         return ResponseEntity.ok(ballotService.getVotedCandidate(membershipNumber));
     }
