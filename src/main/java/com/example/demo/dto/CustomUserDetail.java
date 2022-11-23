@@ -2,9 +2,12 @@ package com.example.demo.dto;
 
 import com.example.demo.domain.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class CustomUserDetail implements UserDetails {
 
@@ -15,7 +18,9 @@ public class CustomUserDetail implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> authorityList=new ArrayList<>();
+        user.getRoles().stream().forEach(roles -> authorityList.add(new SimpleGrantedAuthority(roles.getName())));
+        return authorityList;
     }
 
     public Long getUserId(){
@@ -28,7 +33,7 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.user.getName();
+        return this.user.getEmail();
     }
 
     @Override
