@@ -12,6 +12,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     Optional<User> findByMembershipNumber(Long membershipNumber);
 
     @Query("select u from User u where u.email = ?1")
-    User
-    findByEmail(String email);
+    User findByEmail(String email);
 }

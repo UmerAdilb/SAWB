@@ -47,7 +47,7 @@ public class CandidateService {
         else {
             throw new NullPointerException();}}
 
-    public  CandidateDTO findUserById(long id) {
+    public  CandidateDTO findCandidateById(long id) {
         Optional<Candidate> candidate = candidateRepository.findById(id);
         if (candidate.isPresent()) {
             return todto(candidate.get());

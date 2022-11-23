@@ -13,6 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
+
 public class CandidateController {
     @Autowired
     CandidateService candidateService;
@@ -25,7 +27,7 @@ public class CandidateController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/candidate")
-    public ResponseEntity<CandidateDTO> saveUser(@Valid @RequestBody CandidateDTO candidateDTO) {
+    public ResponseEntity<CandidateDTO> saveCandidate(@Valid @RequestBody CandidateDTO candidateDTO) {
         return ResponseEntity.ok(candidateService.addCandidate(candidateDTO));}
 
     /**
