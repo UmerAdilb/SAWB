@@ -11,4 +11,6 @@ public interface BallotRepository extends JpaRepository<Ballot,Long> {
     Optional<Ballot> findByUserId(Long id);
 
     void deleteByUserId(Long id);
+
+    Long countByCandidateId(Long id);
 }
