@@ -30,4 +30,10 @@ public class GlobalExceptionHandler {
                 .timeStamp(LocalDateTime.now()).build();
         return new ResponseEntity(errorMessage, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(value = VotingForbidden.class)
+    public ResponseEntity<ErrorMessage> votingNotAllowedException(VotingForbidden ex){
+        ErrorMessage errorMessage = ErrorMessage.builder().body(ex.getMessage()).code(HttpStatus.FORBIDDEN)
+                .timeStamp(LocalDateTime.now()).build();
+        return new ResponseEntity(errorMessage, HttpStatus.FORBIDDEN);
+    }
 }
