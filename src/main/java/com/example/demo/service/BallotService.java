@@ -53,7 +53,7 @@ if (checkPollingEnabled()) {
         }
 
     } else {
-        ballotDTO.getUser().setRole("ROLE_VOTER");
+//        ballotDTO.getUser().setRole("ROLE_VOTER");
         User user = userRepository.save(ballotDTO.getUser());
         Ballot ballot = todo(ballotDTO);
 
