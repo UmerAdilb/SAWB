@@ -9,6 +9,8 @@ import com.example.demo.dto.BallotInformationDTO;
 import com.example.demo.dto.CandidateDTO;
 import com.example.demo.dto.TallyResponse;
 import com.example.demo.exception.NoValueFound;
+import com.example.demo.exception.VotingForbidden;
+import com.example.demo.repository.BallotInformationRepository;
 import com.example.demo.repository.BallotRepository;
 import com.example.demo.repository.CandidateRepository;
 import com.example.demo.repository.UserRepository;
@@ -51,7 +53,7 @@ if (checkPollingEnabled()) {
         }
 
     } else {
-        ballotDTO.getUser().setRole("ROLE_VOTER");
+//        ballotDTO.getUser().setRole("ROLE_VOTER");
         User user = userRepository.save(ballotDTO.getUser());
         Ballot ballot = todo(ballotDTO);
 
