@@ -91,7 +91,6 @@ function saveVote(){
         
     }
     sendData("/ballot" , ballot).then(data=>{
-        console.log(data);
         if(data.candidate){
             alert("Voted Successfully")
         }else{
@@ -116,8 +115,12 @@ function getByValue(candidate, candidateId) {
     let membershipNumber = document.getElementById("inputMemberNo").value;
 
     deleteData(`/ballot/${membershipNumber}`).then(data=>{
-        console.log(data)
-        alert("Deleted Successfully")
+        
+        if(data.body){
+            alert("You cannot delete vote")
+        }else{
+           alert("Deleted Successfully")
+        }
     })
   }
 
@@ -149,7 +152,7 @@ function getByValue(candidate, candidateId) {
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
       .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
+        form.addEventListener('button', function (event) {
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
