@@ -13,8 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
-
 public class CandidateController {
     @Autowired
     CandidateService candidateService;
@@ -35,7 +33,6 @@ public class CandidateController {
      * @return
      */
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/candidate")
     public ResponseEntity<List<CandidateDTO>> getAllCandidate(){
         return ResponseEntity.ok(candidateService.getAllCandidate());}
