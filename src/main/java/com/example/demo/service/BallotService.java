@@ -37,7 +37,7 @@ public class BallotService {
     BallotInformationRepository ballotInformationRepository;
 
     public BallotDTO addVote(BallotDTO ballotDTO) {
-if (checkPollingEnabled()) {
+    if (checkPollingEnabled()) {
     if (userIsPresent(ballotDTO.getUser().getMembershipNumber())) {
         Optional<User> user = userRepository.findByMembershipNumber(ballotDTO.getUser().getMembershipNumber());
         Optional<Ballot> ballot = ballotRepository.findByUserId(user.get().getId());
@@ -85,12 +85,14 @@ if (checkPollingEnabled()) {
 
     @Transactional
     public String deleteVote(Long membershipNumber) {
-        if (userIsPresent(membershipNumber)) {
-            Optional<User> user = userRepository.findByMembershipNumber(membershipNumber);
-            ballotRepository.deleteByUserId(user.get().getId());
-            return ("Deleted Succesfully");
-        }
-        return ("Error while deleting!");
+        if (checkPollingEnabled()) {
+            if (userIsPresent(membershipNumber)) {
+                Optional<User> user = userRepository.findByMembershipNumber(membershipNumber);
+                ballotRepository.deleteByUserId(user.get().getId());
+                return ("Deleted Succesfully");
+            }
+            return ("Error while deleting!");
+        }else {throw new VotingForbidden("Voting is closed you can not delete now !");}
     }
 
     public CandidateDTO getVotedCandidate(Long membershipNumber) {

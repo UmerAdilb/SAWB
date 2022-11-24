@@ -15,8 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
-public class    BallotController {
+public class  BallotController {
     @Autowired
     BallotService ballotService;
 
@@ -27,8 +26,9 @@ public class    BallotController {
      */
 
     @PostMapping("/ballot")
-    public ResponseEntity<BallotDTO> saveVote(@Valid @RequestBody BallotDTO balletDTO) {
-        return ResponseEntity.ok(ballotService.addVote(balletDTO));}
+    public ResponseEntity<BallotDTO> saveVote(@RequestBody BallotDTO balletDTO) {
+        return ResponseEntity.ok(ballotService.addVote(balletDTO));
+    }
 
     /**
      * This will delete ballot by member ship number
