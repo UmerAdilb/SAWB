@@ -1,8 +1,12 @@
 
 
 
-
-
+function checkToken(){
+    if(getToken()){
+        localStorage.clear();
+    }
+}
+checkToken();
 
 
 
@@ -88,10 +92,10 @@ function saveVote(){
     }
     sendData("/ballot" , ballot).then(data=>{
         console.log(data);
-        if(data.body != null){
-            alert(data.body);
-        }else{
+        if(data.candidate){
             alert("Voted Successfully")
+        }else{
+           alert("You cannot vote")
         }
         
     })
@@ -122,7 +126,7 @@ function getByValue(candidate, candidateId) {
 
     getData(`/ballot/${membershipNumber}`).then(CandidateData=>{
         debugger
-        if(CandidateData.id != null){
+        if(CandidateData.id){
             console.log(CandidateData);
         document.getElementById("showVote").innerHTML=`You have voted for ${CandidateData.commonName} with the slogan ${CandidateData.description} `;
 
@@ -135,3 +139,23 @@ function getByValue(candidate, candidateId) {
 
   
   }
+
+  (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()

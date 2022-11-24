@@ -37,6 +37,7 @@ public class BallotService {
     BallotInformationRepository ballotInformationRepository;
 
     public BallotDTO addVote(BallotDTO ballotDTO) {
+        System.out.println("tes");
     if (checkPollingEnabled()) {
     if (userIsPresent(ballotDTO.getUser().getMembershipNumber())) {
         Optional<User> user = userRepository.findByMembershipNumber(ballotDTO.getUser().getMembershipNumber());
@@ -60,7 +61,9 @@ public class BallotService {
         ballot.setUser(user);
         Ballot savedBallot = ballotRepository.save(ballot);
         return todto(savedBallot);
-    }}else {throw new VotingForbidden("Voting not Allowed");}}
+    }}else {
+        throw new VotingForbidden("Voting not Allowed");}
+    }
 
     private Boolean userIsPresent(Long membershipNumber) {
         Optional<User> user = userRepository.findByMembershipNumber(membershipNumber);

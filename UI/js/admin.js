@@ -64,3 +64,9 @@ function showResult(allCandidateData){
             tbody.innerHTML = table } };
 
 
+        function logout(){
+
+        localStorage.clear();
+        window.open(login  , "_self")
+
+}

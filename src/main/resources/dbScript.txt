@@ -1,0 +1,29 @@
+
+// SCRIPT FOR CANDIDATE TABLE TO ADD CANDIDATE
+
+INSERT INTO `sawb_db`.`candidate` (`id`, `common_name`, `description`, `scientific_name`) VALUES ('1', 'Snowy Owl', 'White , artic bird , very rare in scotland', 'Bubo Scandiacus');
+INSERT INTO `sawb_db`.`candidate` (`id`, `common_name`, `description`, `scientific_name`) VALUES ('2', 'Common raven ', 'Black , social bird , often viewed as bad omen', 'Corvus corax');
+INSERT INTO `sawb_db`.`candidate` (`id`, `common_name`, `description`, `scientific_name`) VALUES ('3', 'Golden eagle', 'Large bird of prey , Magistic', 'Aquila chrysaetos');
+
+
+// SCRIPT FOR BALLOT INFORMATION TABLE
+
+
+INSERT INTO `sawb_db`.`ballot_information` (`id`, `polling_enabled`) VALUES ('1', b'0');
+
+
+// SCRIPT FOR ROLES TO ADD ROLE
+
+
+INSERT INTO `sawb_db`.`roles` (`id`, `name`) VALUES ('1', 'ROLE_ADMIN');
+
+
+// SCRIPT FOR USER TABLE TO ADD USER
+
+INSERT INTO `sawb_db`.`user` (`id`, `age`, `email`, `membership_number`, `name`, `password`, `region`) VALUES ('1', '23', 'admin@gmail.com', '12345', 'admin', '$2a$12$qZfn1/fhC50eIze/I9sgs.wO1x0WSjTXd4htJikXuK.I08P./fpXy', 'Europe');
+
+
+// SCRIPT FOR USER_ROLES TABLE TO ASSIGN ROLE TO USER
+
+
+INSERT INTO `sawb_db`.`user_roles` (`user_id`, `roles_id`) VALUES ('1', '1');
